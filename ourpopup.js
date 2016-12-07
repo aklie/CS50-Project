@@ -14,7 +14,7 @@ if (document.getElementById('can')) {
     // # specifies that the elements are selected by their ID's
     $("#drawingCanvas").append('</canvas>');
 
-    $("#draw_button").click(draw);
+    $("#draw_button").click(pen);
     $("#erase_button").click(erase);
     $("#clear_button").click(clear);
     $("#exit_button").click(exit);
@@ -24,7 +24,7 @@ if (document.getElementById('can')) {
     var buttons = document.getElementsByClassName("functionalities");
 
     with(canvas.style) {
-        cursor = 'crosshair'
+        cursor = 'crosshair';
         top = '0px';
         left = '0px';
         position = 'absolute';
@@ -142,10 +142,10 @@ if (document.getElementById('can')) {
           ctx.stroke();
         }
     }
-    function erase() {
+    function clear() {
         ctx.clearRect(0, 0, w, h);
     }
-    function eraser() {
+    function erase() {
       erase_drawing = true;
       document.getElementById("draw_button").style.background =  "rgba(0,0,0,0)";
       document.getElementById("erase_button").style.background =  "rgba(0,0,0,0.2)";
