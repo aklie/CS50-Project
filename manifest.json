@@ -17,7 +17,9 @@
   "icons": {
           "128": "icon.png"
   },
+  "options_page": "options.html",
   "permissions": [
+    "storage",
     "activeTab",
     "https://ajax.googleapis.com/"
   ]

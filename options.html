@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head><title>Page Marker Options</title></head>
+<style>
+html,body {
+  margin: 0;
+  padding: 0;
+}
+.pagemarker {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4%;
+  text-align: center;
+}
+
+.donate {
+  display: block;
+  text-align: center;
+  margin-top: 50px;
+}
+
+#val p {
+  margin-top: 0px;
+  vertical-align: middle;
+}
+</style>
+<body>
+  <div class="pagemarker">
+    <h1>Page Marker</h1>
+    <h3>Default color:</h3>
+    <input style="height: 40px; margin: 5px; border-radius: 2px; width: 120px; border-color: black; border-style: solid; border-width: 1px; background-color: #ffffff; padding: 3px; box-sizing: border-box;" type="color" name="color" id="color" value="#FF0000">
+    <h3>Default thickness:</h3>
+    <input type="range" id="thickness" style="color: rgb(144, 144, 144); outline: none; -webkit-appearance: slider-horizontal; border: 0px; margin: 5px; width: 120px; padding:3px;" value="3" max="40" min="1">
+    <div id="val"><p id="px"></p></div>
+    <div id="status"><p id="saved"></p></div>
+    <button id="save">Save</button>
+  </div>
+
+<script src="jquery.min.js"></script>
+<script src="options.js"></script>
+</body>
+</html>
