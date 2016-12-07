@@ -15,7 +15,7 @@
     "persistent": false
   },
   "icons": {
-          "128": "listicon.png"
+          "128": "icon.png"
   },
   "permissions": [
     "activeTab",
