@@ -11,7 +11,7 @@
     "default_title": "Start Drawing!"
   },
   "icons": {
-          "128": "listicon.png"
+          "128": "icon.png"
   },
   "permissions": [
     "activeTab",
