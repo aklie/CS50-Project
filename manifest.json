@@ -10,6 +10,10 @@
     "default_popup": "popup.html",
     "default_title": "Start Drawing!"
   },
+   "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
   "icons": {
           "128": "listicon.png"
   },
