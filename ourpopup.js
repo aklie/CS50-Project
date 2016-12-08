@@ -28,7 +28,7 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     $("#erase_button").click(erase);
     $("#clear_button").click(clear);
     $("#exit_button").click(exit);
-    $("#save_button").click(save);
+    $("#save_button").click(saver);
 
 
     // online storage preferences
@@ -127,6 +127,9 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     canvas.addEventListener("mouseout", function(e) {
         findxy('out', e)
     }, false);
+
+
+
     // canvas.addEventListener('touchstart', sketchpad_touchStart, false);
     // canvas.addEventListener('touchmove', sketchpad_touchMove, false);
     
@@ -148,14 +151,15 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
 
     }
 
-    function save(){
+    function saver(){
       // to do
       // urlData = canvas.toDataURL();
       // window.location = urlData;
 
-
-
+    chrome.runtime.sendMessage({directive: "popup-click"});
+    console.log("it works");
     }
+
     function highlight() {
         erase_drawing = false;
         highlight_drawing = true;
