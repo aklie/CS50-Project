@@ -1,26 +1,25 @@
-
 // this checks if the elements already exists on the document (exit if extension is clicked again)
 if (document.getElementById('can') && document.getElementById('draggable'))
 {
     exit();
-}
+}  
 else
 {
     var ctx, flag, erase_on, highlight_on, stop = false,
         oldX, oldY, newX, newY = 0;
 
-    var canvas = document.createElement("canvas");
-    // ID of the canvas object
+    var canvas = document.createElement("canvas"),
+        popup = document.createElement("div");
+
     canvas.id = "can";
-    // Canvas lives inside body (so document -> body -> canvas)
+    popup.id = "draggable";
     document.body.appendChild(canvas);
-    // ID of options object
-    var options = document.createElement("div");
-    options.id = "draggable";
-    document.body.appendChild(options);
-    // layout options in options object
+    document.body.appendChild(popup);
+    // layout popup in draggable object
     $("#drawingCanvas").append('</canvas>');
-    $("#draggable").append('<div>Web Draw</div><a id="draw_icon"><img id="draw_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="erase_icon"><img id="erase_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="highlight_icon"><img id="highlight_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="save_icon"><img id="save_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="clear_icon"><img id="clear_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="exit_icon"><img id="exit_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><input type="hidden" name="color" id="color"><input type="hidden" name = "thickness" id="thickness">');
+
+    // actual popup's interface
+    $("#draggable").append('<div>Web Doodle</div><a id="draw_icon"><img id="draw_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="erase_icon"><img id="erase_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="highlight_icon"><img id="highlight_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="save_icon"><img id="save_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="clear_icon"><img id="clear_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="exit_icon"><img id="exit_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><input type="hidden" name="color" id="color"><input type="hidden" name = "thickness" id="thickness">');
 
     // online storage preferences
     chrome.storage.sync.get(
@@ -66,7 +65,7 @@ else
             backgroundColor = '#F0F0F5';
         }
     }
-    with(options.style)
+    with(popup.style)
     {
         display = 'block';
         boxSizing = 'content-box';        
@@ -108,7 +107,7 @@ else
     canvas.height = $(document).height();
     ctx = canvas.getContext("2d");
     var fromTop = document.body.scrollTop || document.documentElement.scrollTop;
-    options.style.top = fromTop + "px";
+    popup.style.top = fromTop + "px";
 
     w = canvas.width;
     h = canvas.height;
@@ -128,7 +127,7 @@ else
           ctx.putImageData(save, 0, 0);
         }
         var fromTop = document.body.scrollTop || document.documentElement.scrollTop;
-        options.style.top = fromTop + "px";
+        popup.style.top = fromTop + "px";
       }
     };
 
@@ -187,7 +186,7 @@ else
     }
     
 
-    // set erase_on boolean to true and change button color
+    // erase is off and highlight is off, default is to draw, draw button is toggled
     function draw()
     {
         erase_on = false;
@@ -200,6 +199,7 @@ else
         buttons[5].style.background =  "rgba(0,0,0,0)";
     }
 
+    // erase is on and highlight is off, erase button is toggled
     function erase()
     {
         erase_on = true;
@@ -212,6 +212,7 @@ else
         buttons[5].style.background =  "rgba(0,0,0,0)";
     }
 
+    // erase is off and highlight is on, highlight button is toggled
     function highlight()
     {
         erase_on = false;
@@ -224,6 +225,7 @@ else
         buttons[5].style.background =  "rgba(0,0,0,0)";
     }
 
+    // the entire canvas from x:0 y:0 to x:w y:h is cleared, clear button is toggled
     function clear()
     {
         ctx.clearRect(0, 0, w, h);
@@ -235,6 +237,8 @@ else
         buttons[5].style.background =  "rgba(0,0,0,0)";
     }
 
+    // exit doodle is stopped, all eventlisteners are removed
+    // canvas and draggable is also removed
     function exit()
     {
         stop = true;
@@ -246,6 +250,7 @@ else
         document.getElementById('draggable').remove();
     }
 
+    // function to figure out where the mouse is and what action it is
     function findxy(res, e)
     {
         if (res == 'down')
@@ -287,6 +292,8 @@ else
             ctx.stroke();
             flag = true;
         }
+
+        // if mouse is up, it stops drawing, or creates highlight
         if (res == 'up')
         {
             flag = false;
@@ -296,11 +303,13 @@ else
             }
         }
 
+        // if mouse is out of the webpage, it stops drawing
         if (res == "out")
         {
             flag = false;
         }
 
+        // if mouse is moving, continue to draw and get new coordinates
         if (res == 'move')
         {
             if (flag)
