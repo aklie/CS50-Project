@@ -17,9 +17,23 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     document.body.appendChild(options);
     // layout options in options object
     $("#drawingCanvas").append('</canvas>');
-    $("#draggable").append('<div>Web Draw</div><input type="hidden" name="color" id="color"><a id="draw_icon"><img id="draw_iconImg" style="padding:0px" width="20px" height="20px"></img></a><input type="button" value="Erase" id=erase_button class="functionalities"><input type="button" value="Highlight" id=highlight_button class="functionalities"><input type="button" value="Save Image" id=save_button class="functionalities"><input type="button" value="Clear" id=clear_button class="functionalities"><input type="button" value="Exit" id=exit_button class="functionalities"><input type="hidden" name = "thickness" id="thickness">');
-    document.getElementById("draw_iconImg").src=chrome.extension.getURL("draw_icon.jpg");
-    document.getElementById("draw_icon").style.background = "rgba(0,0,0,0.2)";
+    $("#draggable").append('<div>Web Draw</div><div class="functionalities"></div><a id="draw_icon"><img id="draw_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="erase_icon"><img id="erase_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="highlight_icon"><img id="highlight_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="save_icon"><img id="save_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="clear_icon"><img id="clear_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="exit_icon"><img id="exit_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><input type="hidden" name="color" id="color"><input type="hidden" name = "thickness" id="thickness">'
+
+    // online storage preferences
+      chrome.storage.sync.get({
+      pcolor: '#000099',
+      pthickness: 3
+    }, function(items) {
+      document.getElementById("thickness").value = items.pthickness;
+      $("#color").val(items.pcolor);
+    });
+    document.getElementById("draw_iconImg").src=chrome.extension.getURL("draw_icon.png");
+    document.getElementById("erase_iconImg").src=chrome.extension.getURL("erase_icon.png");
+    document.getElementById("highlight_iconImg").src=chrome.extension.getURL("highlight_icon.png");
+    document.getElementById("save_iconImg").src=chrome.extension.getURL("save_icon.png");
+    document.getElementById("clear_iconImg").src=chrome.extension.getURL("clear_icon.png");
+    document.getElementById("exit_iconImg").src=chrome.extension.getURL("exit_icon.png");
+
     // # specifies that the elements are selected by their ID's
 
     // when clicked, go to these functions
@@ -32,38 +46,21 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     $("#save_button").click(saver);
 
 
-    // online storage preferences
-      chrome.storage.sync.get({
-      pcolor: '#FF0000',
-      pthickness: 3
-    }, function(items) {
-      document.getElementById("thickness").value = items.pthickness;
-      $("#color").val(items.pcolor);
-    });
+
     var draw_icon = document.getElementById("draw_icon");
     var erase_button = document.getElementById("erase_button");
     var buttons = document.getElementsByClassName("functionalities");
     
-    with(draw_icon.style) {
+    for (var i = 0; i < buttons.length; i++) {
+        with(buttons[i].style) {
       display = 'inline-block';
       boxSizing = 'content-box';
       margin = '5px';
       padding = '4px';
-      width = '121px';
-      height = '120px';
+      width = '50px';
+      height = '50px';
       borderRadius = '3px';
       cursor = 'pointer';
-    }
-    for (var i = 0; i < buttons.length; i++) {
-        with(buttons[i].style) {
-            padding = '5px';
-            margin = '5px';
-            color = '#000000';
-            fontSize = '15px';
-            fontFamily = 'Helvetica';
-            textTransform = 'none';
-            userSelect = 'none';
-            clear = 'none';
         }
     }
     with(options.style) {

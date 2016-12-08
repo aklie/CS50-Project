@@ -23,7 +23,12 @@
         "persistent": false
     },
     "web_accessible_resources": [
-        "draw_icon.jpg"
+        "draw_icon.png",
+        "erase_icon.png",
+        "highlight_icon.png",
+        "save_icon.png",
+        "clear_icon.png",
+        "exit_icon.png"
     ],
     "options_page": "options.html",
     "manifest_version": 2
