@@ -39,7 +39,6 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     // when clicked, go to these functions
     $("#highlight_icon").click(highlight);
     $("#draw_icon").click(pen);
-    $("#type_icon").click(keyboard);
     $("#erase_icon").click(erase);
     $("#clear_icon").click(clear);
     $("#exit_icon").click(exit);
@@ -205,9 +204,12 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
         }
     }
     
-    function clear() {
-      ctx.clearRect(0, 0, w, h);
-      buttons[0].style.background =  "rgba(0,0,0,0)";
+
+    // set erase_drawing boolean to true and change button color
+    function pen() {
+      erase_drawing = false;
+      highlight_drawing = false;
+      buttons[0].style.background =  "rgba(0,0,0,0.3)";
       buttons[1].style.background =  "rgba(0,0,0,0)";
       buttons[2].style.background =  "rgba(0,0,0,0)";
       buttons[3].style.background =  "rgba(0,0,0,0)";
@@ -215,23 +217,11 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
       buttons[5].style.background =  "rgba(0,0,0,0)";
     }
 
-    // set erase_drawing boolean to true and change button color
-    function pen() {
-      erase_drawing = false;
-      highlight_drawing = false;
-      buttons[0].style.background =  "rgba(0,0,0,0)";
-      buttons[1].style.background =  "rgba(0,0,0,0)";
-      buttons[2].style.background =  "rgba(0,0,0,0)";
-      buttons[3].style.background =  "rgba(0,0,0,0)";
-      buttons[4].style.background =  "rgba(0,0,0,0)";
-      buttons[5].style.background =  "rgba(0,0,0,0)";
-    }
-    
     function erase() {
       erase_drawing = true;
       highlight_drawing = false;
       buttons[0].style.background =  "rgba(0,0,0,0)";
-      buttons[1].style.background =  "rgba(0,0,0,0)";
+      buttons[1].style.background =  "rgba(0,0,0,0.3)";
       buttons[2].style.background =  "rgba(0,0,0,0)";
       buttons[3].style.background =  "rgba(0,0,0,0)";
       buttons[4].style.background =  "rgba(0,0,0,0)";
@@ -243,21 +233,22 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
       highlight_drawing = true;
       buttons[0].style.background =  "rgba(0,0,0,0)";
       buttons[1].style.background =  "rgba(0,0,0,0)";
-      buttons[2].style.background =  "rgba(0,0,0,0)";
+      buttons[2].style.background =  "rgba(0,0,0,0.3)";
       buttons[3].style.background =  "rgba(0,0,0,0)";
       buttons[4].style.background =  "rgba(0,0,0,0)";
       buttons[5].style.background =  "rgba(0,0,0,0)";
     }
-    function keyboard() {
-      erase_drawing = false;
-      highlight_drawing = false;
+
+    function clear() {
+      ctx.clearRect(0, 0, w, h);
       buttons[0].style.background =  "rgba(0,0,0,0)";
       buttons[1].style.background =  "rgba(0,0,0,0)";
       buttons[2].style.background =  "rgba(0,0,0,0)";
       buttons[3].style.background =  "rgba(0,0,0,0)";
-      buttons[4].style.background =  "rgba(0,0,0,0)";
+      buttons[4].style.background =  "rgba(0,0,0,0.3)";
       buttons[5].style.background =  "rgba(0,0,0,0)";
     }
+
     function exit() {
         stop = true;
         canvas.removeEventListener("mousemove", false);
