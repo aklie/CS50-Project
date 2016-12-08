@@ -97,10 +97,10 @@ else
     });
 
     var ctx, flag = false,
-        prevX = 0,
-        currX = 0,
-        prevY = 0,
-        currY = 0,
+        oldX = 0,
+        newX = 0,
+        oldY = 0,
+        newY = 0,
         prevtouchX = 0,
         prevtouchY = 0,
         touchX = 0,
@@ -184,8 +184,8 @@ else
           ctx.lineWidth = 40;
           ctx.strokeStyle = color;
           ctx.lineJoin = "round";
-          ctx.moveTo(prevX, prevY);
-          ctx.lineTo(currX, currY);
+          ctx.moveTo(oldX, oldY);
+          ctx.lineTo(newX, newY);
           ctx.closePath();
           ctx.stroke();
         } else {
@@ -194,8 +194,8 @@ else
             ctx.lineWidth = 20;
             ctx.strokeStyle = "YELLOW";
             ctx.globalAlpha = 0.35;
-            ctx.moveTo(prevX, prevY)
-            ctx.lineTo(currX, currY);
+            ctx.moveTo(oldX, oldY)
+            ctx.lineTo(newX, newY);
             ctx.closePath();
             ctx.stroke();
             }
@@ -204,8 +204,8 @@ else
             ctx.lineWidth = thickness;
             ctx.strokeStyle = color;
             ctx.lineJoin = "round";
-            ctx.moveTo(prevX, prevY);
-            ctx.lineTo(currX, currY);
+            ctx.moveTo(oldX, oldY);
+            ctx.lineTo(newX, newY);
             ctx.closePath();
             ctx.stroke();
           }  
@@ -214,50 +214,55 @@ else
     
 
     // set erase_on boolean to true and change button color
-    function pen() {
-      erase_on = false;
-      highlight_on = false;
-      buttons[0].style.background =  "rgba(0,0,0,0.3)";
-      buttons[1].style.background =  "rgba(0,0,0,0)";
-      buttons[2].style.background =  "rgba(0,0,0,0)";
-      buttons[3].style.background =  "rgba(0,0,0,0)";
-      buttons[4].style.background =  "rgba(0,0,0,0)";
-      buttons[5].style.background =  "rgba(0,0,0,0)";
+    function pen()
+    {
+        erase_on = false;
+        highlight_on = false;
+        buttons[0].style.background =  "rgba(0,0,0,0.3)";
+        buttons[1].style.background =  "rgba(0,0,0,0)";
+        buttons[2].style.background =  "rgba(0,0,0,0)";
+        buttons[3].style.background =  "rgba(0,0,0,0)";
+        buttons[4].style.background =  "rgba(0,0,0,0)";
+        buttons[5].style.background =  "rgba(0,0,0,0)";
     }
 
-    function erase() {
-      erase_on = true;
-      highlight_on = false;
-      buttons[0].style.background =  "rgba(0,0,0,0)";
-      buttons[1].style.background =  "rgba(0,0,0,0.3)";
-      buttons[2].style.background =  "rgba(0,0,0,0)";
-      buttons[3].style.background =  "rgba(0,0,0,0)";
-      buttons[4].style.background =  "rgba(0,0,0,0)";
-      buttons[5].style.background =  "rgba(0,0,0,0)";
+    function erase()
+    {
+        erase_on = true;
+        highlight_on = false;
+        buttons[0].style.background =  "rgba(0,0,0,0)";
+        buttons[1].style.background =  "rgba(0,0,0,0.3)";
+        buttons[2].style.background =  "rgba(0,0,0,0)";
+        buttons[3].style.background =  "rgba(0,0,0,0)";
+        buttons[4].style.background =  "rgba(0,0,0,0)";
+        buttons[5].style.background =  "rgba(0,0,0,0)";
     }
 
-    function highlight() {
-      erase_on = false;
-      highlight_on = true;
-      buttons[0].style.background =  "rgba(0,0,0,0)";
-      buttons[1].style.background =  "rgba(0,0,0,0)";
-      buttons[2].style.background =  "rgba(0,0,0,0.3)";
-      buttons[3].style.background =  "rgba(0,0,0,0)";
-      buttons[4].style.background =  "rgba(0,0,0,0)";
-      buttons[5].style.background =  "rgba(0,0,0,0)";
+    function highlight()
+    {
+        erase_on = false;
+        highlight_on = true;
+        buttons[0].style.background =  "rgba(0,0,0,0)";
+        buttons[1].style.background =  "rgba(0,0,0,0)";
+        buttons[2].style.background =  "rgba(0,0,0,0.3)";
+        buttons[3].style.background =  "rgba(0,0,0,0)";
+        buttons[4].style.background =  "rgba(0,0,0,0)";
+        buttons[5].style.background =  "rgba(0,0,0,0)";
     }
 
-    function clear() {
-      ctx.clearRect(0, 0, w, h);
-      buttons[0].style.background =  "rgba(0,0,0,0)";
-      buttons[1].style.background =  "rgba(0,0,0,0)";
-      buttons[2].style.background =  "rgba(0,0,0,0)";
-      buttons[3].style.background =  "rgba(0,0,0,0)";
-      buttons[4].style.background =  "rgba(0,0,0,0.3)";
-      buttons[5].style.background =  "rgba(0,0,0,0)";
+    function clear()
+    {
+        ctx.clearRect(0, 0, w, h);
+        buttons[0].style.background =  "rgba(0,0,0,0)";
+        buttons[1].style.background =  "rgba(0,0,0,0)";
+        buttons[2].style.background =  "rgba(0,0,0,0)";
+        buttons[3].style.background =  "rgba(0,0,0,0)";
+        buttons[4].style.background =  "rgba(0,0,0,0.3)";
+        buttons[5].style.background =  "rgba(0,0,0,0)";
     }
 
-    function exit() {
+    function exit()
+    {
         stop = true;
         canvas.removeEventListener("mousemove", false);
         canvas.removeEventListener("mousedown", false);
@@ -268,64 +273,78 @@ else
         document.getElementById('can').remove();
         document.getElementById('draggable').remove();
     }
-    function findxy(res, e) {
-        if (res == 'down') {
-          if(highlight_on) {
-            currX = e.pageX - canvas.offsetLeft;
-            currY = e.pageY - canvas.offsetTop;
-          }
-            prevX = currX;
-            prevY = currY;
-            currX = e.pageX - canvas.offsetLeft;
-            currY = e.pageY - canvas.offsetTop;
+
+    function findxy(res, e)
+    {
+        if (res == 'down')
+        {
+            if(highlight_on)
+            {
+                newX = e.pageX - canvas.offsetLeft;
+                newY = e.pageY - canvas.offsetTop;
+            }
+            oldX = newX;
+            oldY = newY;
+            newX = e.pageX - canvas.offsetLeft;
+            newY = e.pageY - canvas.offsetTop;
             var thickness = document.getElementById("thickness").value;
             var color = document.getElementById("color").value;
             ctx.beginPath();
-            if(!erase_on) {
-              ctx.globalCompositeOperation="source-over";
-              ctx.strokeStyle = color;
-              ctx.lineWidth = thickness;
-              ctx.lineJoin = "round";
-              if(!highlight_on) {
-                ctx.moveTo(currX, currY-0.001);
-                ctx.lineTo(currX, currY);
-              }
-              
-            } else {
-              ctx.globalCompositeOperation="destination-out";
-              ctx.strokeStyle = color;
-              ctx.lineWidth = thickness * 3;
-              ctx.lineJoin = "round";
-              ctx.moveTo(currX, currY-0.001);
-              ctx.lineTo(currX, currY);
+            if(!erase_on)
+            {
+                ctx.globalCompositeOperation="source-over";
+                ctx.strokeStyle = color;
+                ctx.lineWidth = thickness;
+                ctx.lineJoin = "round";
+                if(!highlight_on)
+                {
+                    ctx.moveTo(newX, newY-0.001);
+                    ctx.lineTo(newX, newY);
+                }
+            }
+            else
+            {
+                ctx.globalCompositeOperation="destination-out";
+                ctx.strokeStyle = color;
+                ctx.lineWidth = thickness * 3;
+                ctx.lineJoin = "round";
+                ctx.moveTo(newX, newY-0.001);
+                ctx.lineTo(newX, newY);
             }
             ctx.closePath();
             ctx.stroke();
             flag = true;
         }
-        if (res == 'up') {
+        if (res == 'up')
+        {
             flag = false;
-            if(highlight_on) {
-              draw();
+            if(highlight_on)
+            {
+                draw();
             }
         }
 
-        if (res == "out") {
-          flag = false;
+        if (res == "out")
+        {
+            flag = false;
         }
 
-        if (res == 'move') {
-            if (flag) {
-                if(highlight_on) {
-                  currX = e.pageX - canvas.offsetLeft;
-                  currY = e.pageY - canvas.offsetTop;
+        if (res == 'move')
+        {
+            if (flag)
+            {
+                if(highlight_on)
+                {
+                    newX = e.pageX - canvas.offsetLeft;
+                    newY = e.pageY - canvas.offsetTop;
                 }
-                else {
-                  prevX = currX;
-                  prevY = currY;
-                  currX = e.pageX - canvas.offsetLeft;
-                  currY = e.pageY - canvas.offsetTop;
-                  draw();
+                else
+                {
+                    oldX = newX;
+                    oldY = newY;
+                    newX = e.pageX - canvas.offsetLeft;
+                    newY = e.pageY - canvas.offsetTop;
+                    draw();
                 }
             }
         }
