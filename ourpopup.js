@@ -6,9 +6,9 @@ if (document.getElementById('can') && document.getElementById('draggable'))
 }
 else
 {
-    var erase_on = false;
-    var highlight_on = false;
-    var stop = false;
+    var ctx, flag, erase_on, highlight_on, stop = false,
+        oldX, oldY, newX, newY = 0;
+
     var canvas = document.createElement("canvas");
     // ID of the canvas object
     canvas.id = "can";
@@ -43,15 +43,15 @@ else
     // # specifies that the elements are selected by their ID's
     // when clicked, go to these functions
     $("#highlight_icon").click(highlight);
-    $("#draw_icon").click(pen);
+    $("#draw_icon").click(draw);
     $("#erase_icon").click(erase);
     $("#clear_icon").click(clear);
     $("#exit_icon").click(exit);
     $("#save_icon").click(saver);
 
-    var draw_icon = document.getElementById("draw_icon");
-    var erase_icon = document.getElementById("erase_icon");
-    var buttons = document.getElementsByClassName("buttons");
+    var draw_icon = document.getElementById("draw_icon"),
+        erase_icon = document.getElementById("erase_icon"),
+        buttons = document.getElementsByClassName("buttons");
     
     for (var i = 0; i < buttons.length; i++)
     {
@@ -96,15 +96,7 @@ else
         $("#draggable").draggable();
     });
 
-    var ctx, flag = false,
-        oldX = 0,
-        newX = 0,
-        oldY = 0,
-        newY = 0,
-        prevtouchX = 0,
-        prevtouchY = 0,
-        touchX = 0,
-        touchY = 0;
+
 
     if($(document).height() > 32767)
     {
@@ -176,7 +168,7 @@ else
       chrome.runtime.sendMessage({directive: "popup-click"});
     }
 
-    function draw() {
+    function doodle() {
         ctx.beginPath();
         if(erase_on) {
           ctx.globalCompositeOperation="destination-out";
@@ -214,7 +206,7 @@ else
     
 
     // set erase_on boolean to true and change button color
-    function pen()
+    function draw()
     {
         erase_on = false;
         highlight_on = false;
@@ -320,7 +312,7 @@ else
             flag = false;
             if(highlight_on)
             {
-                draw();
+                doodle();
             }
         }
 
@@ -344,7 +336,7 @@ else
                     oldY = newY;
                     newX = e.pageX - canvas.offsetLeft;
                     newY = e.pageY - canvas.offsetTop;
-                    draw();
+                    doodle();
                 }
             }
         }
