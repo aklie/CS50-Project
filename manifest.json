@@ -22,6 +22,9 @@
         ],
         "persistent": false
     },
+    "web_accessible_resources": [
+        "draw_icon.jpg"
+    ],
     "options_page": "options.html",
     "manifest_version": 2
 }
