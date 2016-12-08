@@ -207,54 +207,56 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     
     function clear() {
       ctx.clearRect(0, 0, w, h);
-      document.getElementById("highlight_icon").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("draw_icon").style.backgroundColor = "#D1D1E0";
-      document.getElementById("erase_icon").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("save_icon").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("clear_icon").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("exit_icon").style.background =  "rgba(0,0,0,0)";
+      buttons[0].style.background =  "rgba(0,0,0,0)";
+      buttons[1].style.background =  "rgba(0,0,0,0)";
+      buttons[2].style.background =  "rgba(0,0,0,0)";
+      buttons[3].style.background =  "rgba(0,0,0,0)";
+      buttons[4].style.background =  "rgba(0,0,0,0)";
+      buttons[5].style.background =  "rgba(0,0,0,0)";
     }
 
     // set erase_drawing boolean to true and change button color
-    function erase() {
-      erase_drawing = true;
-      highlight_drawing = false;
-      document.getElementById("highlight_icon").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("draw_icon").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("erase_icon").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("save_icon").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("clear_icon").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("exit_icon").style.background =  "rgba(0,0,0,0)";
-    }
     function pen() {
       erase_drawing = false;
       highlight_drawing = false;
-      document.getElementById("highlight_icon").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("draw_icon").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("erase_icon").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("save_icon").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("clear_icon").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("exit_icon").style.background =  "rgba(0,0,0,0)";
+      buttons[0].style.background =  "rgba(0,0,0,0)";
+      buttons[1].style.background =  "rgba(0,0,0,0)";
+      buttons[2].style.background =  "rgba(0,0,0,0)";
+      buttons[3].style.background =  "rgba(0,0,0,0)";
+      buttons[4].style.background =  "rgba(0,0,0,0)";
+      buttons[5].style.background =  "rgba(0,0,0,0)";
     }
+    
+    function erase() {
+      erase_drawing = true;
+      highlight_drawing = false;
+      buttons[0].style.background =  "rgba(0,0,0,0)";
+      buttons[1].style.background =  "rgba(0,0,0,0)";
+      buttons[2].style.background =  "rgba(0,0,0,0)";
+      buttons[3].style.background =  "rgba(0,0,0,0)";
+      buttons[4].style.background =  "rgba(0,0,0,0)";
+      buttons[5].style.background =  "rgba(0,0,0,0)";
+    }
+
     function highlight() {
       erase_drawing = false;
       highlight_drawing = true;
-      document.getElementById("highlight_icon").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("draw_icon").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("erase_icon").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("save_icon").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("clear_icon").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("exit_icon").style.background =  "rgba(0,0,0,0)";
+      buttons[0].style.background =  "rgba(0,0,0,0)";
+      buttons[1].style.background =  "rgba(0,0,0,0)";
+      buttons[2].style.background =  "rgba(0,0,0,0)";
+      buttons[3].style.background =  "rgba(0,0,0,0)";
+      buttons[4].style.background =  "rgba(0,0,0,0)";
+      buttons[5].style.background =  "rgba(0,0,0,0)";
     }
     function keyboard() {
       erase_drawing = false;
       highlight_drawing = false;
-      document.getElementById("highlight_icon").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("draw_icon").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("erase_icon").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("save_icon").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("clear_icon").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("exit_icon").style.background =  "rgba(0,0,0,0)";
+      buttons[0].style.background =  "rgba(0,0,0,0)";
+      buttons[1].style.background =  "rgba(0,0,0,0)";
+      buttons[2].style.background =  "rgba(0,0,0,0)";
+      buttons[3].style.background =  "rgba(0,0,0,0)";
+      buttons[4].style.background =  "rgba(0,0,0,0)";
+      buttons[5].style.background =  "rgba(0,0,0,0)";
     }
     function exit() {
         stop = true;
