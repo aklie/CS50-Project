@@ -172,7 +172,7 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
         ctx.beginPath();
         if(erase_drawing) {
           ctx.globalCompositeOperation="destination-out";
-          ctx.lineWidth = thickness * 3;
+          ctx.lineWidth = 40;
           ctx.strokeStyle = color;
           ctx.lineJoin = "round";
           ctx.moveTo(prevX, prevY);
