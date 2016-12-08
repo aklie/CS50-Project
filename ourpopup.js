@@ -185,6 +185,7 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
             ctx.stroke();
             }
           else {
+            ctx.globalAlpha = 1;
             ctx.lineWidth = thickness;
             ctx.strokeStyle = color;
             ctx.lineJoin = "round";
