@@ -8,8 +8,6 @@ chrome.browserAction.onClicked.addListener(function(tab) {
           chrome.tabs.executeScript(null, { file: "ourpopup.js" }, function() {})
         }
     });
-
-
 });
 
 var id =100;

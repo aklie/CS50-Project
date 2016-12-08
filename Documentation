@@ -39,7 +39,8 @@ To HIGHLIGHT, click on the highlighter icon. User may highlight anywhere on page
 dragging precision cursor; highlight will appear upon click release.
 
 To SAVE IMAGE, click on the save icon. A new tab will open, exporting user's current page view and
-doodles. To save permanently, save new tab by right clicking and clicking "Save image as".
+doodles. To save permanently, save new tab by right clicking and clicking "Save image as" and an 
+image file will download.
 
 To CLEAR, click on the clear icon. All current drawings and highlights will be removed from
 webpage. Be careful when clearing work that has not been saved, as previous drawings are
@@ -56,6 +57,17 @@ color of DRAW to a specified color. Default color is dark blue.
 
 By right-clicking on Web Doodle's icon in the top right, user may select "Options" and change the
 width of DRAW line to a specified width. Default width is 3pt.
+
+===================================================================================================
+
+AREAS OF POSSIBLE DEVELOPMENT
+With PDF open, two-finger scroll is nonfunctional for both Windows and Mac. Scrolling is possible
+only through keyboard buttons.
+
+Multiple colors on a single webpage is not possible. Pages must be refreshed for color change in
+"Options" to take place.
+
+Pop-up shakes on certain pages during scrolling. Unsure 
 
 ===================================================================================================
 
