@@ -4,6 +4,7 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     exit();
 } else {
     var erase_drawing = false;
+    var highlight_drawing = false;
     var stop = false;
     var canvas = document.createElement("canvas");
     // ID of the canvas object
@@ -156,12 +157,8 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
 
     }
     function highlight() {
-        ctx.lineWidth = 20;
-        ctx.strokeStyle = "YELLOW";
-        ctx.globalAlpha = 0.35;
-        ctx.moveTo(0, 0);
-        ctx.lineTo(200, 200);
-        ctx.stroke();
+        erase_drawing = false;
+        highlight_drawing = true;
     }
 
     function draw() {
@@ -177,13 +174,20 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
           ctx.stroke();
         } else {
           ctx.globalCompositeOperation="source-over";
-          ctx.lineWidth = thickness;
-          ctx.strokeStyle = color;
-          ctx.lineJoin = "round";
-          ctx.moveTo(prevX, prevY);
-          ctx.lineTo(currX, currY);
-          ctx.closePath();
-          ctx.stroke();
+          if(highlight_drawing) {
+            ctx.lineWidth = 20;
+            ctx.strokeStyle = "YELLOW";
+            ctx.globalAlpha = 0.35;
+          }
+          else {
+            ctx.lineWidth = thickness;
+            ctx.strokeStyle = color;
+            ctx.lineJoin = "round";
+          }
+            ctx.moveTo(prevX, prevY);
+            ctx.lineTo(currX, currY);
+            ctx.closePath();
+            ctx.stroke();
         }
     }
     function drawTouch(x, y) {
