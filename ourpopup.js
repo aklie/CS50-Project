@@ -16,7 +16,7 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     options.id = "draggable";
     document.body.appendChild(options);
     // layout options in options object
-    $("#draggable").append('<div>Web Draw </div><input type="hidden" name="color" id="color"><input type="button" value="Type" id=type_button class="functionalities"><input type="button" value="Highlight" id=highlight_button class="functionalities"><input type="button" value="Draw" id=draw_button class="functionalities"><input type="button" value="Erase" id=erase_button class="functionalities"><input type="button" value="Save Image" id=save_button class="functionalities"><input type="button" value="Clear" id=clear_button class="functionalities"><input type="button" value="Exit" id=exit_button class="functionalities"><input type="hidden" name = "thickness" id="thickness">');
+    $("#draggable").append('<div>Web Draw</div><input type="hidden" name="color" id="color"><input type="button" value="Type" id=type_button class="functionalities"><input type="button" value="Highlight" id=highlight_button class="functionalities"><input type="button" value="Draw" id=draw_button class="functionalities"><input type="button" value="Erase" id=erase_button class="functionalities"><input type="button" value="Save Image" id=save_button class="functionalities"><input type="button" value="Clear" id=clear_button class="functionalities"><input type="button" value="Exit" id=exit_button class="functionalities"><input type="hidden" name = "thickness" id="thickness">');
   
     // # specifies that the elements are selected by their ID's
     $("#drawingCanvas").append('</canvas>');
@@ -42,11 +42,24 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     var draw_button = document.getElementById("draw_button");
     var erase_button = document.getElementById("erase_button");
     var buttons = document.getElementsByClassName("functionalities");
-
+    for (var i = 0; i < buttons.length; i++) {
+        with(buttons[i].style) {
+            padding = '5px';
+            margin = '5px';
+            color = '#000000';
+            fontSize = '15px';
+            fontFamily = 'Helvetica';
+            marginBottom = '0px';
+            marginTop = '0px';
+            textTransform = 'none';
+            userSelect = 'none';
+            clear = 'none';
+        }
+    }
     with(options.style) {
         display = 'block';
-        height = '120px';
-        width = '150px';
+        height = '100px';
+        width = '500px';
         borderStyle = 'solid';
         margin = '20px';
         padding = '5px';
