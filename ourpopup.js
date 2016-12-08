@@ -99,7 +99,7 @@ else
 
     if($(document).height() > 32767)
     {
-        alert("Unfortunately due to chrome browser limits, Web Draw does not support pages with a height greater than 32,767 pixels.");
+        alert("Sorry! The page is too long for Web Doodle!");
         exit();
     }
 
@@ -115,7 +115,7 @@ else
     window.onscroll = function() {
       if (!stop) {
         if($(document).scrollTop() > 32767) {
-          alert("Unfortunately due to chrome browser limits, Web Draw does not support pages with a height greater than 32,767 pixels.");
+          alert("Sorry! The page is too long for Web Doodle!");
           exit();
         }
         if($(document).height() != document.getElementById('can').height) {

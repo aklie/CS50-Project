@@ -1,7 +1,7 @@
 {
-    "name": "Web Notes",
-    "description": "Draw directly on any website in realtime without the hassle of taking a screenshot!",
-    "version": "1",
+    "name": "Web Doodle",
+    "description": "Take notes, highlight, or doodle on your webpage!",
+    "version": "1.0",
     "offline_enabled": true,
     "permissions": [
         "activeTab",
@@ -14,7 +14,7 @@
     },
     "browser_action": {
         "default_icon": "icon.png",
-        "default_title": "Page Marker"
+        "default_title": "Web Doodle"
     },
     "background": {
         "scripts": [
