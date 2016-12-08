@@ -1,10 +1,13 @@
 
 // this checks if the elements already exists on the document (exit if extension is clicked again)
-if (document.getElementById('can') && document.getElementById('draggable')) {
+if (document.getElementById('can') && document.getElementById('draggable'))
+{
     exit();
-} else {
-    var erase_drawing = false;
-    var highlight_drawing = false;
+}
+else
+{
+    var erase_on = false;
+    var highlight_on = false;
     var stop = false;
     var canvas = document.createElement("canvas");
     // ID of the canvas object
@@ -17,15 +20,18 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     document.body.appendChild(options);
     // layout options in options object
     $("#drawingCanvas").append('</canvas>');
-    $("#draggable").append('<div>Web Draw</div><a id="draw_icon"><img id="draw_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="erase_icon"><img id="erase_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="highlight_icon"><img id="highlight_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="save_icon"><img id="save_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="clear_icon"><img id="clear_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="exit_icon"><img id="exit_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><input type="hidden" name="color" id="color"><input type="hidden" name = "thickness" id="thickness">');
+    $("#draggable").append('<div>Web Draw</div><a id="draw_icon"><img id="draw_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="erase_icon"><img id="erase_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="highlight_icon"><img id="highlight_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="save_icon"><img id="save_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="clear_icon"><img id="clear_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="exit_icon"><img id="exit_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><input type="hidden" name="color" id="color"><input type="hidden" name = "thickness" id="thickness">');
 
     // online storage preferences
-      chrome.storage.sync.get({
-      pcolor: '#000099',
-      pthickness: 3
-    }, function(items) {
-      document.getElementById("thickness").value = items.pthickness;
-      $("#color").val(items.pcolor);
+    chrome.storage.sync.get(
+    {
+        pcolor: '#000099',
+        pthickness: 3
+    },
+    function(items)
+    {
+        document.getElementById("thickness").value = items.pthickness;
+        $("#color").val(items.pcolor);
     });
     document.getElementById("draw_iconImg").src=chrome.extension.getURL("draw_icon.png");
     document.getElementById("erase_iconImg").src=chrome.extension.getURL("erase_icon.png");
@@ -35,7 +41,6 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     document.getElementById("exit_iconImg").src=chrome.extension.getURL("exit_icon.png");
 
     // # specifies that the elements are selected by their ID's
-
     // when clicked, go to these functions
     $("#highlight_icon").click(highlight);
     $("#draw_icon").click(pen);
@@ -44,24 +49,25 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     $("#exit_icon").click(exit);
     $("#save_icon").click(saver);
 
-
-
     var draw_icon = document.getElementById("draw_icon");
     var erase_icon = document.getElementById("erase_icon");
-    var buttons = document.getElementsByClassName("functionalities");
+    var buttons = document.getElementsByClassName("buttons");
     
-    for (var i = 0; i < buttons.length; i++) {
-        with(buttons[i].style) {
-      margin = '5px';
-      padding = '4px';
-      width = '50px';
-      height = '50px';
-      borderRadius = '10px';
-      cursor = 'pointer';
-      backgroundColor = '#F0F0F5';
+    for (var i = 0; i < buttons.length; i++)
+    {
+        with(buttons[i].style)
+        {
+            margin = '5px';
+            padding = '4px';
+            width = '50px';
+            height = '50px';
+            borderRadius = '10px';
+            cursor = 'pointer';
+            backgroundColor = '#F0F0F5';
         }
     }
-    with(options.style) {
+    with(options.style)
+    {
         display = 'block';
         boxSizing = 'content-box';        
         margin = '40px';
@@ -75,7 +81,8 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
         borderRadius = '10px';
     }
 
-    with(canvas.style) {
+    with(canvas.style)
+    {
         top = '0px';
         left = '0px';
         position = 'absolute';
@@ -84,10 +91,10 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
         cursor = 'crosshair';
     }
 
-    $(function() {
+    $(function()
+    {
         $("#draggable").draggable();
     });
-
 
     var ctx, flag = false,
         prevX = 0,
@@ -99,9 +106,10 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
         touchX = 0,
         touchY = 0;
 
-    if($(document).height() > 32767) {
-      alert("Unfortunately due to chrome browser limits, Web Draw does not support pages with a height greater than 32,767 pixels.");
-      exit();
+    if($(document).height() > 32767)
+    {
+        alert("Unfortunately due to chrome browser limits, Web Draw does not support pages with a height greater than 32,767 pixels.");
+        exit();
     }
 
     canvas.width = document.body.clientWidth;
@@ -147,18 +155,18 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     // canvas.addEventListener('touchstart', sketchpad_touchStart, false);
     // canvas.addEventListener('touchmove', sketchpad_touchMove, false);
     
-    $(document).keydown(function(e) {
-        if (!stop) {
-            switch (e.which) {
-                case 88:
-                    erase();
-                    break;
-                case 27:
-                    exit();
-                    break;
-            }
-        }
-    });
+    // $(document).keydown(function(e) {
+    //     if (!stop) {
+    //         switch (e.which) {
+    //             case 88:
+    //                 erase();
+    //                 break;
+    //             case 27:
+    //                 exit();
+    //                 break;
+    //         }
+    //     }
+    // });
 
     function saver(){
       // to do
@@ -170,8 +178,9 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
 
     function draw() {
         ctx.beginPath();
-        if(erase_drawing) {
+        if(erase_on) {
           ctx.globalCompositeOperation="destination-out";
+          ctx.globalAlpha = 1;
           ctx.lineWidth = 40;
           ctx.strokeStyle = color;
           ctx.lineJoin = "round";
@@ -181,8 +190,7 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
           ctx.stroke();
         } else {
           ctx.globalCompositeOperation="source-over";
-          if(highlight_drawing) {
-            ctx.globalCompositeOperation="source-over";
+          if(highlight_on) {
             ctx.lineWidth = 20;
             ctx.strokeStyle = "YELLOW";
             ctx.globalAlpha = 0.35;
@@ -205,10 +213,10 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     }
     
 
-    // set erase_drawing boolean to true and change button color
+    // set erase_on boolean to true and change button color
     function pen() {
-      erase_drawing = false;
-      highlight_drawing = false;
+      erase_on = false;
+      highlight_on = false;
       buttons[0].style.background =  "rgba(0,0,0,0.3)";
       buttons[1].style.background =  "rgba(0,0,0,0)";
       buttons[2].style.background =  "rgba(0,0,0,0)";
@@ -218,8 +226,8 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     }
 
     function erase() {
-      erase_drawing = true;
-      highlight_drawing = false;
+      erase_on = true;
+      highlight_on = false;
       buttons[0].style.background =  "rgba(0,0,0,0)";
       buttons[1].style.background =  "rgba(0,0,0,0.3)";
       buttons[2].style.background =  "rgba(0,0,0,0)";
@@ -229,8 +237,8 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     }
 
     function highlight() {
-      erase_drawing = false;
-      highlight_drawing = true;
+      erase_on = false;
+      highlight_on = true;
       buttons[0].style.background =  "rgba(0,0,0,0)";
       buttons[1].style.background =  "rgba(0,0,0,0)";
       buttons[2].style.background =  "rgba(0,0,0,0.3)";
@@ -262,7 +270,7 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     }
     function findxy(res, e) {
         if (res == 'down') {
-          if(highlight_drawing) {
+          if(highlight_on) {
             currX = e.pageX - canvas.offsetLeft;
             currY = e.pageY - canvas.offsetTop;
           }
@@ -273,12 +281,12 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
             var thickness = document.getElementById("thickness").value;
             var color = document.getElementById("color").value;
             ctx.beginPath();
-            if(!erase_drawing) {
+            if(!erase_on) {
               ctx.globalCompositeOperation="source-over";
               ctx.strokeStyle = color;
               ctx.lineWidth = thickness;
               ctx.lineJoin = "round";
-              if(!highlight_drawing) {
+              if(!highlight_on) {
                 ctx.moveTo(currX, currY-0.001);
                 ctx.lineTo(currX, currY);
               }
@@ -295,15 +303,20 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
             ctx.stroke();
             flag = true;
         }
-        if (res == 'up' || res == "out") {
+        if (res == 'up') {
             flag = false;
-            if(highlight_drawing) {
+            if(highlight_on) {
               draw();
             }
         }
+
+        if (res == "out") {
+          flag = false;
+        }
+
         if (res == 'move') {
             if (flag) {
-                if(highlight_drawing) {
+                if(highlight_on) {
                   currX = e.pageX - canvas.offsetLeft;
                   currY = e.pageY - canvas.offsetTop;
                 }
