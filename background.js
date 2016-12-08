@@ -1,4 +1,4 @@
-browserAction.onClicked.addListener(function(tab) {
+chrome.browserAction.onClicked.addListener(function(tab) {
     chrome.tabs.executeScript(tab.id, {
         file: "jquery.min.js"
     }, function() {
@@ -8,4 +8,6 @@ browserAction.onClicked.addListener(function(tab) {
           chrome.tabs.executeScript(null, { file: "ourpopup.js" }, function() {})
         }
     });
+
+
 });

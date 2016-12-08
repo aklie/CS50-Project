@@ -1,26 +1,27 @@
 {
-  "manifest_version": 2,
-
-  "name": "Web Draw",
-  "description": "This extension allows user to draw on webpages",
-  "version": "1.0",
-
-  "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "popup.html",
-    "default_title": "Start Drawing!"
-  },
-   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
-  "icons": {
-          "128": "icon.png"
-  },
-  "options_page": "options.html",
-  "permissions": [
-    "storage",
-    "activeTab",
-    "https://ajax.googleapis.com/"
-  ]
+    "name": "Web Notes",
+    "description": "Draw directly on any website in realtime without the hassle of taking a screenshot!",
+    "version": "1",
+    "offline_enabled": true,
+    "permissions": [
+        "activeTab",
+        "storage",
+        "tabs",
+        "<all_urls>"
+    ],
+    "icons": {
+        "128": "icon.png"
+    },
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_title": "Page Marker"
+    },
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": false
+    },
+    "options_page": "options.html",
+    "manifest_version": 2
 }

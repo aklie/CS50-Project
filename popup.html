@@ -1,9 +1,11 @@
 <!doctype html>
+
 <!--
  This page is shown when the extension button is clicked, because the
  "browser_action" field in manifest.json contains the "default_popup" key with
  value "popup.html".
  -->
+
 <html>
   <body>
     <div>Choose a color</div><input style="height: 40px; margin: 5px; border-radius: 2px; width: 120px; border: 1px solid black !important; background-color: #ffffff; padding: 3px; box-sizing: border-box;" type="color" name="color" id="color" value="#FF0000">
@@ -12,7 +14,8 @@
     <input type="button" value="Clear" id=clear_button class="functionalities">
     <input type="button" value="Exit" id=exit_button class="functionalities">
     <div>Thickness</div><input type="range" value="Thickness" id=thickness style="color: rgb(144, 144, 144); outline: none; -webkit-appearance: slider-horizontal; border: 0px; margin: 5px; width: 120px; padding:3px;" value="3" max="40" min="1">
-  </body>
+   </body>
+
   <!--<div class="title_content_draggable">Choose a color</div><input style="height: 40px; margin: 5px; border-radius: 2px; width: 120px; border: 1px solid black !important; background-color: #ffffff; padding: 3px; box-sizing: border-box;" type="color" name="color" id="color" value="#FF0000">
   <div class="title_content_draggable">Tools</div>
     <a id="pen_pagemarker"><img id="pen_pagemarkerImg" style="padding:0px" width="20px" height="20px"></img></a>
@@ -21,10 +24,9 @@
   <input type="button" value="Clear" id="clear_canvas" class="draggable_button">
   <input type="button" value="Close" id="exit_canvas" class="draggable_button">
   -->
+
   <head>
-    <script src="jquery.min.js"></script>
     <title>Drawing Tool</title>
-    <script src="ourpopup.js"></script>
   </head>
 </html>
 
