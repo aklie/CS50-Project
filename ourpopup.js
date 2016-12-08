@@ -144,27 +144,9 @@ else
     canvas.addEventListener("mouseout", function(e) {
         findxy('out', e)
     }, false);
-    // canvas.addEventListener('touchstart', sketchpad_touchStart, false);
-    // canvas.addEventListener('touchmove', sketchpad_touchMove, false);
-    
-    // $(document).keydown(function(e) {
-    //     if (!stop) {
-    //         switch (e.which) {
-    //             case 88:
-    //                 erase();
-    //                 break;
-    //             case 27:
-    //                 exit();
-    //                 break;
-    //         }
-    //     }
-    // });
+
 
     function saver(){
-      // to do
-      // urlData = canvas.toDataURL();
-      // window.location = urlData;
-
       chrome.runtime.sendMessage({directive: "popup-click"});
     }
 
@@ -260,8 +242,6 @@ else
         canvas.removeEventListener("mousedown", false);
         canvas.removeEventListener("mouseup", false);
         canvas.removeEventListener("mouseout", false);
-        canvas.removeEventListener("touchstart", false);
-        canvas.removeEventListener("touchmove", false);
         document.getElementById('can').remove();
         document.getElementById('draggable').remove();
     }
