@@ -10,7 +10,7 @@
         "<all_urls>"
     ],
     "icons": {
-        "128": "icon.png"
+        "128": "big_icon.png"
     },
     "browser_action": {
         "default_icon": "icon.png",
