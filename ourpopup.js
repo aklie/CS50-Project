@@ -17,7 +17,7 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     document.body.appendChild(options);
     // layout options in options object
     $("#drawingCanvas").append('</canvas>');
-    $("#draggable").append('<div>Web Draw</div><div class="functionalities"></div><a id="draw_icon"><img id="draw_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="erase_icon"><img id="erase_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="highlight_icon"><img id="highlight_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="save_icon"><img id="save_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="clear_icon"><img id="clear_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="exit_icon"><img id="exit_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><input type="hidden" name="color" id="color"><input type="hidden" name = "thickness" id="thickness">'
+    $("#draggable").append('<div>Web Draw</div><a id="draw_icon"><img id="draw_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="erase_icon"><img id="erase_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="highlight_icon"><img id="highlight_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="save_icon"><img id="save_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="clear_icon"><img id="clear_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><a id="exit_icon"><img id="exit_iconImg" class="functionalities" style="padding:0px" width="50px" height="50px"></img></a><input type="hidden" name="color" id="color"><input type="hidden" name = "thickness" id="thickness">');
 
     // online storage preferences
       chrome.storage.sync.get({
@@ -37,30 +37,29 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     // # specifies that the elements are selected by their ID's
 
     // when clicked, go to these functions
-    $("#highlight_button").click(highlight);
-    $("#draw_button").click(pen);
-    $("#type_button").click(keyboard);
-    $("#erase_button").click(erase);
-    $("#clear_button").click(clear);
-    $("#exit_button").click(exit);
-    $("#save_button").click(saver);
+    $("#highlight_icon").click(highlight);
+    $("#draw_icon").click(pen);
+    $("#type_icon").click(keyboard);
+    $("#erase_icon").click(erase);
+    $("#clear_icon").click(clear);
+    $("#exit_icon").click(exit);
+    $("#save_icon").click(saver);
 
 
 
     var draw_icon = document.getElementById("draw_icon");
-    var erase_button = document.getElementById("erase_button");
+    var erase_icon = document.getElementById("erase_icon");
     var buttons = document.getElementsByClassName("functionalities");
     
     for (var i = 0; i < buttons.length; i++) {
         with(buttons[i].style) {
-      display = 'inline-block';
-      boxSizing = 'content-box';
       margin = '5px';
       padding = '4px';
       width = '50px';
       height = '50px';
-      borderRadius = '3px';
+      borderRadius = '10px';
       cursor = 'pointer';
+      backgroundColor = '#F0F0F5';
         }
     }
     with(options.style) {
@@ -71,7 +70,7 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
         right = '0px';
         position = 'absolute';
         fontFamily = 'Arial Black';
-        backgroundColor = 'rgb(255, 255, 255)';
+        backgroundColor = '#F0F0F5';
         zIndex = '1000';
         boxShadow = '2px 4px 6px GREY';
         borderRadius = '10px';
@@ -205,85 +204,57 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
           }  
         }
     }
-    function drawTouch(x, y) {
-        var thickness = document.getElementById("thickness").value;
-        var color = document.getElementById("color").value;
-        ctx.beginPath();
-        if(erase_drawing) {
-          ctx.globalCompositeOperation="destination-out";
-          ctx.lineWidth = thickness * 3;
-          ctx.strokeStyle = color;
-          ctx.lineJoin = "round";
-          ctx.moveTo(prevtouchX, prevtouchY);
-          ctx.lineTo(x, y);
-          ctx.closePath();
-          ctx.stroke();
-        } else {
-          ctx.globalCompositeOperation="source-over";
-          ctx.lineWidth = thickness;
-          ctx.strokeStyle = color;
-          ctx.lineJoin = "round";
-          ctx.moveTo(prevtouchX, prevtouchY);
-          ctx.lineTo(x, y);
-          ctx.closePath();
-          ctx.stroke();
-        }
-    }
+    
     function clear() {
       ctx.clearRect(0, 0, w, h);
-      document.getElementById("type_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("highlight_button").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("draw_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("erase_button").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("save_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("clear_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("exit_button").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("highlight_icon").style.background =  "rgba(0,0,0,0)";      
+      document.getElementById("draw_icon").style.backgroundColor = "#D1D1E0";
+      document.getElementById("erase_icon").style.background =  "rgba(0,0,0,0)";      
+      document.getElementById("save_icon").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("clear_icon").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("exit_icon").style.background =  "rgba(0,0,0,0)";
     }
 
     // set erase_drawing boolean to true and change button color
     function erase() {
       erase_drawing = true;
       highlight_drawing = false;
-      document.getElementById("type_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("highlight_button").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("draw_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("erase_button").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("save_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("clear_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("exit_button").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("highlight_icon").style.background =  "rgba(0,0,0,0)";      
+      document.getElementById("draw_icon").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("erase_icon").style.background =  "rgba(0,0,0,0)";      
+      document.getElementById("save_icon").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("clear_icon").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("exit_icon").style.background =  "rgba(0,0,0,0)";
     }
     function pen() {
       erase_drawing = false;
       highlight_drawing = false;
-      document.getElementById("type_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("highlight_button").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("draw_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("erase_button").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("save_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("clear_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("exit_button").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("highlight_icon").style.background =  "rgba(0,0,0,0)";      
+      document.getElementById("draw_icon").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("erase_icon").style.background =  "rgba(0,0,0,0)";      
+      document.getElementById("save_icon").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("clear_icon").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("exit_icon").style.background =  "rgba(0,0,0,0)";
     }
     function highlight() {
       erase_drawing = false;
       highlight_drawing = true;
-      document.getElementById("type_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("highlight_button").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("draw_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("erase_button").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("save_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("clear_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("exit_button").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("highlight_icon").style.background =  "rgba(0,0,0,0)";      
+      document.getElementById("draw_icon").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("erase_icon").style.background =  "rgba(0,0,0,0)";      
+      document.getElementById("save_icon").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("clear_icon").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("exit_icon").style.background =  "rgba(0,0,0,0)";
     }
     function keyboard() {
       erase_drawing = false;
       highlight_drawing = false;
-      document.getElementById("type_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("highlight_button").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("draw_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("erase_button").style.background =  "rgba(0,0,0,0)";      
-      document.getElementById("save_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("clear_button").style.background =  "rgba(0,0,0,0)";
-      document.getElementById("exit_button").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("highlight_icon").style.background =  "rgba(0,0,0,0)";      
+      document.getElementById("draw_icon").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("erase_icon").style.background =  "rgba(0,0,0,0)";      
+      document.getElementById("save_icon").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("clear_icon").style.background =  "rgba(0,0,0,0)";
+      document.getElementById("exit_icon").style.background =  "rgba(0,0,0,0)";
     }
     function exit() {
         stop = true;
