@@ -16,8 +16,8 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
     options.id = "draggable";
     document.body.appendChild(options);
     // layout options in options object
-    $("#draggable").append('<div>Web Draw</div><input type="hidden" name="color" id="color"><input type="button" value="Draw" id=draw_button class="functionalities"><input type="button" value="Erase" id=erase_button class="functionalities"><input type="button" value="Highlight" id=highlight_button class="functionalities"><input type="button" value="Save Image" id=save_button class="functionalities"><input type="button" value="Clear" id=clear_button class="functionalities"><input type="button" value="Exit" id=exit_button class="functionalities"><input type="hidden" name = "thickness" id="thickness">');
-  
+    $("#draggable").append('<div>Web Draw</div><input type="hidden" name="color" id="color"><input type="button" value="Draw" img src="draw_icon.png" id=draw_button class="functionalities"><input type="button" value="Erase" id=erase_button class="functionalities"><input type="button" value="Highlight" id=highlight_button class="functionalities"><input type="button" value="Save Image" id=save_button class="functionalities"><input type="button" value="Clear" id=clear_button class="functionalities"><input type="button" value="Exit" id=exit_button class="functionalities"><input type="hidden" name = "thickness" id="thickness">');
+    
     // # specifies that the elements are selected by their ID's
     $("#drawingCanvas").append('</canvas>');
 
@@ -65,6 +65,7 @@ if (document.getElementById('can') && document.getElementById('draggable')) {
         backgroundColor = 'rgb(255, 255, 255)';
         zIndex = '1000';
         boxShadow = '2px 4px 6px GREY';
+        borderRadius = '10px';
     }
 
     with(canvas.style) {
