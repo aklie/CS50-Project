@@ -1,3 +1,4 @@
+// Syncing and storing the thickness value
 document.getElementById('px').innerHTML=document.getElementById("thickness").value + "px";
 chrome.storage.sync.get({
   pcolor: '#FF0000',
@@ -11,6 +12,8 @@ chrome.storage.sync.get({
 $('input[type=range]').on('input', function () {
   document.getElementById('px').innerHTML=document.getElementById("thickness").value + "px";
 });
+
+// once save is clicked, update thickness and color
 document.getElementById("save").onclick = save_options;
 function save_options() {
   var thickness = document.getElementById("thickness").value;

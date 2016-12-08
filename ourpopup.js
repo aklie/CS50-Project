@@ -1,3 +1,8 @@
+/*
+    This is the main component of the Chrome Extension
+    All of the interface and the methods are in thie .js file
+*/
+
 // this checks if the elements already exists on the document (exit if extension is clicked again)
 if (document.getElementById('can') && document.getElementById('draggable'))
 {
@@ -5,23 +10,26 @@ if (document.getElementById('can') && document.getElementById('draggable'))
 }  
 else
 {
+    // Most of the variables that we will need
     var ctx, flag, erase_on, highlight_on, stop = false,
         oldX, oldY, newX, newY = 0;
 
+    // The two main bodies: canvas and the popup
     var canvas = document.createElement("canvas"),
         popup = document.createElement("div");
 
     canvas.id = "can";
     popup.id = "draggable";
+
+    // Add the two components to the body
     document.body.appendChild(canvas);
     document.body.appendChild(popup);
-    // layout popup in draggable object
-    $("#drawingCanvas").append('</canvas>');
 
-    // actual popup's interface
+    // the actual CSS for how the popup will look
+    $("#drawingCanvas").append('</canvas>');
     $("#draggable").append('<div>Web Doodle</div><a id="draw_icon"><img id="draw_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="erase_icon"><img id="erase_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="highlight_icon"><img id="highlight_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="save_icon"><img id="save_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="clear_icon"><img id="clear_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="exit_icon"><img id="exit_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><input type="hidden" name="color" id="color"><input type="hidden" name = "thickness" id="thickness">');
 
-    // online storage preferences
+    // online storage for preferences (color and thickness)
     chrome.storage.sync.get(
     {
         pcolor: '#000099',
@@ -32,6 +40,8 @@ else
         document.getElementById("thickness").value = items.pthickness;
         $("#color").val(items.pcolor);
     });
+
+    // Get the icons via Chrome
     document.getElementById("draw_iconImg").src=chrome.extension.getURL("draw_icon.png");
     document.getElementById("erase_iconImg").src=chrome.extension.getURL("erase_icon.png");
     document.getElementById("highlight_iconImg").src=chrome.extension.getURL("highlight_icon.png");
@@ -39,7 +49,6 @@ else
     document.getElementById("clear_iconImg").src=chrome.extension.getURL("clear_icon.png");
     document.getElementById("exit_iconImg").src=chrome.extension.getURL("exit_icon.png");
 
-    // # specifies that the elements are selected by their ID's
     // when clicked, go to these functions
     $("#highlight_icon").click(highlight);
     $("#draw_icon").click(draw);
@@ -48,10 +57,10 @@ else
     $("#exit_icon").click(exit);
     $("#save_icon").click(saver);
 
-    var draw_icon = document.getElementById("draw_icon"),
-        erase_icon = document.getElementById("erase_icon"),
-        buttons = document.getElementsByClassName("buttons");
+    // create buttons as one object
+    var buttons = document.getElementsByClassName("buttons");
     
+    // Customize the style of all the icons
     for (var i = 0; i < buttons.length; i++)
     {
         with(buttons[i].style)
@@ -65,6 +74,8 @@ else
             backgroundColor = '#F0F0F5';
         }
     }
+
+    // Customize the style of the popup
     with(popup.style)
     {
         display = 'block';
@@ -80,6 +91,7 @@ else
         borderRadius = '10px';
     }
 
+    // Canvas is transparent and covers the entire HTML
     with(canvas.style)
     {
         top = '0px';
@@ -95,16 +107,15 @@ else
         $("#draggable").draggable();
     });
 
-
-
-    if($(document).height() > 32767)
-    {
-        alert("Sorry! The page is too long for Web Doodle!");
-        exit();
+    if($(document).height() > 32767) {
+      alert("Sorry! Too long for Web Doodle!");
+      exit();
     }
-
+    // Find the width and height of the canvas
     canvas.width = document.body.clientWidth;
     canvas.height = $(document).height();
+
+    // ctx will be used for drawing on the webpage
     ctx = canvas.getContext("2d");
     var fromTop = document.body.scrollTop || document.documentElement.scrollTop;
     popup.style.top = fromTop + "px";
@@ -114,10 +125,12 @@ else
 
     window.onscroll = function() {
       if (!stop) {
-        if($(document).scrollTop() > 32767) {
-          alert("Sorry! The page is too long for Web Doodle!");
-          exit();
+        if($(document).height() > 32767) {
+            alert("Sorry! Too long for Web Doodle!");
+            exit();
+            }
         }
+        // Makes sure that the height of the document always matches the canvas's
         if($(document).height() != document.getElementById('can').height) {
           var save = ctx.getImageData(0, 0, document.body.clientWidth, $(document).height());
           document.getElementById('can').width = document.body.clientWidth;
@@ -131,6 +144,7 @@ else
       }
     };
 
+    // Four eventlisteners based on the mouse actions
     canvas.addEventListener("mousemove", function(e) {
         findxy('move', e)
     }, false);
@@ -144,44 +158,57 @@ else
         findxy('out', e)
     }, false);
 
-
+    // Function to save the page 
     function saver(){
       chrome.runtime.sendMessage({directive: "popup-click"});
     }
 
-    function doodle() {
+    // Function to draw
+    function doodle()
+    {
         ctx.beginPath();
-        if(erase_on) {
-          ctx.globalCompositeOperation="destination-out";
-          ctx.globalAlpha = 1;
-          ctx.lineWidth = 40;
-          ctx.strokeStyle = color;
-          ctx.lineJoin = "round";
-          ctx.moveTo(oldX, oldY);
-          ctx.lineTo(newX, newY);
-          ctx.closePath();
-          ctx.stroke();
-        } else {
-          ctx.globalCompositeOperation="source-over";
-          if(highlight_on) {
-            ctx.lineWidth = 20;
-            ctx.strokeStyle = "YELLOW";
-            ctx.globalAlpha = 0.35;
-            ctx.moveTo(oldX, oldY)
-            ctx.lineTo(newX, newY);
-            ctx.closePath();
-            ctx.stroke();
-            }
-          else {
+        // If in eraser mode
+        if(erase_on)
+        {
+            // Destination out cancels out previous graphics
+            ctx.globalCompositeOperation="destination-out";
             ctx.globalAlpha = 1;
-            ctx.lineWidth = thickness;
+            ctx.lineWidth = 40;
             ctx.strokeStyle = color;
             ctx.lineJoin = "round";
             ctx.moveTo(oldX, oldY);
             ctx.lineTo(newX, newY);
             ctx.closePath();
             ctx.stroke();
-          }  
+        }
+        // If in drawing mode
+        else
+        {
+            // Source over can draw over previous graphics
+            ctx.globalCompositeOperation="source-over";
+            // Highlighting
+            if(highlight_on)
+            {
+                ctx.lineWidth = 20;
+                ctx.strokeStyle = "YELLOW";
+                ctx.globalAlpha = 0.35;
+                ctx.moveTo(oldX, oldY)
+                ctx.lineTo(newX, newY);
+                ctx.closePath();
+                ctx.stroke();
+            }
+            // Using the actual pen
+            else
+            {
+                ctx.globalAlpha = 1;
+                ctx.lineWidth = thickness;
+                ctx.strokeStyle = color;
+                ctx.lineJoin = "round";
+                ctx.moveTo(oldX, oldY);
+                ctx.lineTo(newX, newY);
+                ctx.closePath();
+                ctx.stroke();
+            }  
         }
     }
     
@@ -257,6 +284,7 @@ else
         {
             if(highlight_on)
             {
+                // Find the current X and Y position based on the canvas
                 newX = e.pageX - canvas.offsetLeft;
                 newY = e.pageY - canvas.offsetTop;
             }
@@ -264,29 +292,22 @@ else
             oldY = newY;
             newX = e.pageX - canvas.offsetLeft;
             newY = e.pageY - canvas.offsetTop;
+
+            // get the thickness and color
             var thickness = document.getElementById("thickness").value;
             var color = document.getElementById("color").value;
             ctx.beginPath();
+            ctx.strokeStyle = color;
+            ctx.lineJoin = "round";
+            
             if(!erase_on)
             {
                 ctx.globalCompositeOperation="source-over";
-                ctx.strokeStyle = color;
                 ctx.lineWidth = thickness;
-                ctx.lineJoin = "round";
-                if(!highlight_on)
-                {
-                    ctx.moveTo(newX, newY-0.001);
-                    ctx.lineTo(newX, newY);
-                }
             }
             else
             {
                 ctx.globalCompositeOperation="destination-out";
-                ctx.strokeStyle = color;
-                ctx.lineWidth = thickness * 3;
-                ctx.lineJoin = "round";
-                ctx.moveTo(newX, newY-0.001);
-                ctx.lineTo(newX, newY);
             }
             ctx.closePath();
             ctx.stroke();
@@ -314,11 +335,13 @@ else
         {
             if (flag)
             {
+                // If highlighting, only track the initial movement
                 if(highlight_on)
                 {
                     newX = e.pageX - canvas.offsetLeft;
                     newY = e.pageY - canvas.offsetTop;
                 }
+                // If drawing, continuously track movement to draw
                 else
                 {
                     oldX = newX;
@@ -330,4 +353,3 @@ else
             }
         }
     }
-}
