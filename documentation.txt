@@ -1,0 +1,79 @@
+
+									 WEB DOODLE USER GUIDE
+
+===================================================================================================
+
+WEB DOODLE
+A guide to Web Doodle
+
+Web Doodle is a Chrome extension that allows a user to draw, erase, and highlight on a webpage in
+Chrome. User may also clear drawings or export drawings.
+
+====================================================================================================
+
+INITIAL DOWNLOAD
+Download all files associated with Web Doodle and store in a local folder.
+
+
+CHROME EXTENSION UPLOAD
+If not yet installed, download and install Google Chrome located at https://www.google.com/chrome/.
+Open a Chrome tab and go to chrome://extensions. At the top of the page, locate "Load unpacked
+extension...". Once clicked, a pop-up will prompt for selection of the folder containing Web Doodle.
+Select the folder containing Web Doodle and click OK. Once uploaded, Web Doodle will appear as a
+small icon in the top right corner of Chrome.
+
+
+USAGE
+To open Web Doodle, click on Web Doodle's icon in the top right corner of Chrome. Your cursor will
+become a precision cursor.
+NOTE: Web Doodle does not support any new tab pages, Chrome Web Store pages, or similar pages
+reserved by Chrome.
+
+To DRAW, click on the draw icon. User may draw on webpage by clicking and dragging precision cursor.
+draw on any given webpage.
+
+To ERASE, click on the eraser icon. User may erase previously drawn lines and highlights by clicking
+and dragging precision cursor.
+
+To HIGHLIGHT, click on the highlighter icon. User may highlight anywhere on page by clicking and
+dragging precision cursor; highlight will appear upon click release.
+
+To SAVE IMAGE, click on the save icon. A new tab will open, exporting user's current page view and
+doodles. To save permanently, save new tab by right clicking and clicking "Save image as" and an 
+image file will download.
+
+To CLEAR, click on the clear icon. All current drawings and highlights will be removed from
+webpage. Be careful when clearing work that has not been saved, as previous drawings are
+unretrievable.
+
+To EXIT, click on the exit icon. Web Doodle will then close.
+
+
+OPTIONS
+Web Doodle's pop-up box may be dragged to anywhere on the webpage for user convenience.
+
+By right-clicking on Web Doodle's icon in the top right, user may select "Options" and change the
+color of DRAW to a specified color. Default color is dark blue.
+
+By right-clicking on Web Doodle's icon in the top right, user may select "Options" and change the
+width of DRAW line to a specified width. Default width is 3pt.
+
+===================================================================================================
+
+AREAS OF POSSIBLE DEVELOPMENT
+With PDF open, two-finger scroll is nonfunctional for both Windows and Mac. Scrolling is possible
+only through keyboard buttons.
+
+Multiple colors on a single webpage is not possible. Pages must be refreshed for color change in
+"Options" to take place.
+
+Pop-up shakes on certain pages during scrolling. Unsure of what causes the issue.
+
+===================================================================================================
+
+Please direct any questions, concerns, or bugs to webdoodledevelopers@gmail.com. Thank you for
+support!
+
+Thanks to the Google Extension Developer's Guide, particularly the Test Screenshot Extension, and
+to two similar Chrome extensions, Web Paint and Page Marker, for inspiration, improvements,
+and a place to begin thinking about our code.
