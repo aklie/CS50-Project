@@ -218,9 +218,9 @@ else
     {
         erase_on = false;
         highlight_on = false;
-        buttons[0].style.background =  "rgba(0,0,0,0.3)";
+        buttons[0].style.background =  "rgba(0,0,0,0)";
         buttons[1].style.background =  "rgba(0,0,0,0)";
-        buttons[2].style.background =  "rgba(0,0,0,0)";
+        buttons[2].style.background =  "rgba(0,0,0,0.3)";
         buttons[3].style.background =  "rgba(0,0,0,0)";
         buttons[4].style.background =  "rgba(0,0,0,0)";
         buttons[5].style.background =  "rgba(0,0,0,0)";
@@ -232,9 +232,9 @@ else
         erase_on = true;
         highlight_on = false;
         buttons[0].style.background =  "rgba(0,0,0,0)";
-        buttons[1].style.background =  "rgba(0,0,0,0.3)";
+        buttons[1].style.background =  "rgba(0,0,0,0)";
         buttons[2].style.background =  "rgba(0,0,0,0)";
-        buttons[3].style.background =  "rgba(0,0,0,0)";
+        buttons[3].style.background =  "rgba(0,0,0,0.3)";
         buttons[4].style.background =  "rgba(0,0,0,0)";
         buttons[5].style.background =  "rgba(0,0,0,0)";
     }
@@ -246,9 +246,9 @@ else
         highlight_on = true;
         buttons[0].style.background =  "rgba(0,0,0,0)";
         buttons[1].style.background =  "rgba(0,0,0,0)";
-        buttons[2].style.background =  "rgba(0,0,0,0.3)";
+        buttons[2].style.background =  "rgba(0,0,0,0)";
         buttons[3].style.background =  "rgba(0,0,0,0)";
-        buttons[4].style.background =  "rgba(0,0,0,0)";
+        buttons[4].style.background =  "rgba(0,0,0,0.3)";
         buttons[5].style.background =  "rgba(0,0,0,0)";
     }
 
@@ -260,8 +260,10 @@ else
         buttons[1].style.background =  "rgba(0,0,0,0)";
         buttons[2].style.background =  "rgba(0,0,0,0)";
         buttons[3].style.background =  "rgba(0,0,0,0)";
-        buttons[4].style.background =  "rgba(0,0,0,0.3)";
+        buttons[4].style.background =  "rgba(0,0,0,0)";
         buttons[5].style.background =  "rgba(0,0,0,0)";
+        buttons[6].style.background =  "rgba(0,0,0,0.3)";
+
     }
 
     // exit doodle is stopped, all eventlisteners are removed
