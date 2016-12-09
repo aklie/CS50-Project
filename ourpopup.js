@@ -224,6 +224,7 @@ else
         buttons[3].style.background =  "rgba(0,0,0,0)";
         buttons[4].style.background =  "rgba(0,0,0,0)";
         buttons[5].style.background =  "rgba(0,0,0,0)";
+        buttons[6].style.background =  "rgba(0,0,0,0)";
     }
 
     // erase is on and highlight is off, erase button is toggled
@@ -237,6 +238,7 @@ else
         buttons[3].style.background =  "rgba(0,0,0,0.3)";
         buttons[4].style.background =  "rgba(0,0,0,0)";
         buttons[5].style.background =  "rgba(0,0,0,0)";
+        buttons[6].style.background =  "rgba(0,0,0,0)";
     }
 
     // erase is off and highlight is on, highlight button is toggled
@@ -250,6 +252,8 @@ else
         buttons[3].style.background =  "rgba(0,0,0,0)";
         buttons[4].style.background =  "rgba(0,0,0,0.3)";
         buttons[5].style.background =  "rgba(0,0,0,0)";
+        buttons[6].style.background =  "rgba(0,0,0,0)";
+
     }
 
     // the entire canvas from x:0 y:0 to x:w y:h is cleared, clear button is toggled
