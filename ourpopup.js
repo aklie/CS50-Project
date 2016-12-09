@@ -27,7 +27,7 @@ else
 
     // the actual CSS for how the popup will look
     $("#drawingCanvas").append('</canvas>');
-    $("#draggable").append('<div>Web Doodle</div><a id="draw_icon"><img id="draw_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="erase_icon"><img id="erase_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="highlight_icon"><img id="highlight_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="save_icon"><img id="save_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="clear_icon"><img id="clear_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><a id="exit_icon"><img id="exit_iconImg" class="buttons" style="padding:0px" width="50px" height="50px"></img></a><input type="hidden" name="color" id="color"><input type="hidden" name = "thickness" id="thickness">');
+    $("#draggable").append('<div>Web Doodle</div><a id="draw_icon"><img id="draw_iconImg" class="buttonsx" style="padding:0px" width="50px" height="50px"></img></a><a id="erase_icon"><img id="erase_iconImg" class="buttonsx" style="padding:0px" width="50px" height="50px"></img></a><a id="highlight_icon"><img id="highlight_iconImg" class="buttonsx" style="padding:0px" width="50px" height="50px"></img></a><a id="save_icon"><img id="save_iconImg" class="buttonsx" style="padding:0px" width="50px" height="50px"></img></a><a id="clear_icon"><img id="clear_iconImg" class="buttonsx" style="padding:0px" width="50px" height="50px"></img></a><a id="exit_icon"><img id="exit_iconImg" class="buttonsx" style="padding:0px" width="50px" height="50px"></img></a><input type="hidden" name="color" id="color"><input type="hidden" name = "thickness" id="thickness">');
 
     // online storage for preferences (color and thickness)
     chrome.storage.sync.get(
@@ -57,13 +57,13 @@ else
     $("#exit_icon").click(exit);
     $("#save_icon").click(saver);
 
-    // create buttons as one object
-    var buttons = document.getElementsByClassName("buttons");
+    // create buttonsx as one object
+    var buttonsx = document.getElementsByClassName("buttonsx");
     
     // Customize the style of all the icons
-    for (var i = 0; i < buttons.length; i++)
+    for (var i = 0; i < buttonsx.length; i++)
     {
-        with(buttons[i].style)
+        with(buttonsx[i].style)
         {
             margin = '5px';
             padding = '4px';
@@ -218,13 +218,12 @@ else
     {
         erase_on = false;
         highlight_on = false;
-        buttons[0].style.background =  "rgba(0,0,0,0)";
-        buttons[1].style.background =  "rgba(0,0,0,0)";
-        buttons[2].style.background =  "rgba(0,0,0,0.3)";
-        buttons[3].style.background =  "rgba(0,0,0,0)";
-        buttons[4].style.background =  "rgba(0,0,0,0)";
-        buttons[5].style.background =  "rgba(0,0,0,0)";
-        buttons[6].style.background =  "rgba(0,0,0,0)";
+        buttonsx[0].style.background =  "rgba(0,0,0,0.3)";
+        buttonsx[1].style.background =  "rgba(0,0,0,0)";
+        buttonsx[2].style.background =  "rgba(0,0,0,0)";
+        buttonsx[3].style.background =  "rgba(0,0,0,0)";
+        buttonsx[4].style.background =  "rgba(0,0,0,0)";
+        buttonsx[5].style.background =  "rgba(0,0,0,0)";
     }
 
     // erase is on and highlight is off, erase button is toggled
@@ -232,13 +231,12 @@ else
     {
         erase_on = true;
         highlight_on = false;
-        buttons[0].style.background =  "rgba(0,0,0,0)";
-        buttons[1].style.background =  "rgba(0,0,0,0)";
-        buttons[2].style.background =  "rgba(0,0,0,0)";
-        buttons[3].style.background =  "rgba(0,0,0,0.3)";
-        buttons[4].style.background =  "rgba(0,0,0,0)";
-        buttons[5].style.background =  "rgba(0,0,0,0)";
-        buttons[6].style.background =  "rgba(0,0,0,0)";
+        buttonsx[0].style.background =  "rgba(0,0,0,0)";
+        buttonsx[1].style.background =  "rgba(0,0,0,0.3)";
+        buttonsx[2].style.background =  "rgba(0,0,0,0)";
+        buttonsx[3].style.background =  "rgba(0,0,0,0)";
+        buttonsx[4].style.background =  "rgba(0,0,0,0)";
+        buttonsx[5].style.background =  "rgba(0,0,0,0)";
     }
 
     // erase is off and highlight is on, highlight button is toggled
@@ -246,28 +244,24 @@ else
     {
         erase_on = false;
         highlight_on = true;
-        buttons[0].style.background =  "rgba(0,0,0,0)";
-        buttons[1].style.background =  "rgba(0,0,0,0)";
-        buttons[2].style.background =  "rgba(0,0,0,0)";
-        buttons[3].style.background =  "rgba(0,0,0,0)";
-        buttons[4].style.background =  "rgba(0,0,0,0.3)";
-        buttons[5].style.background =  "rgba(0,0,0,0)";
-        buttons[6].style.background =  "rgba(0,0,0,0)";
-
+        buttonsx[0].style.background =  "rgba(0,0,0,0)";
+        buttonsx[1].style.background =  "rgba(0,0,0,0)";
+        buttonsx[2].style.background =  "rgba(0,0,0,0.3)";
+        buttonsx[3].style.background =  "rgba(0,0,0,0)";
+        buttonsx[4].style.background =  "rgba(0,0,0,0)";
+        buttonsx[5].style.background =  "rgba(0,0,0,0)";
     }
 
     // the entire canvas from x:0 y:0 to x:w y:h is cleared, clear button is toggled
     function clear()
     {
         ctx.clearRect(0, 0, w, h);
-        buttons[0].style.background =  "rgba(0,0,0,0)";
-        buttons[1].style.background =  "rgba(0,0,0,0)";
-        buttons[2].style.background =  "rgba(0,0,0,0)";
-        buttons[3].style.background =  "rgba(0,0,0,0)";
-        buttons[4].style.background =  "rgba(0,0,0,0)";
-        buttons[5].style.background =  "rgba(0,0,0,0)";
-        buttons[6].style.background =  "rgba(0,0,0,0.3)";
-
+        buttonsx[0].style.background =  "rgba(0,0,0,0)";
+        buttonsx[1].style.background =  "rgba(0,0,0,0)";
+        buttonsx[2].style.background =  "rgba(0,0,0,0)";
+        buttonsx[3].style.background =  "rgba(0,0,0,0)";
+        buttonsx[4].style.background =  "rgba(0,0,0,0.3)";
+        buttonsx[5].style.background =  "rgba(0,0,0,0)";
     }
 
     // exit doodle is stopped, all eventlisteners are removed
